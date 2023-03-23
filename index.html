@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <!-- CDN BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <!-- CDN FONT-AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <!-- NAVBAR BOOTSTRAP -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+
+              <!-- BOTON MODAL CARRITO -->
+              <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              >
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <!-- Título principal  -->
+      <h1 class="text-center mt-5 mb-5">Lista de Productos</h1>
+      <section class="container d-flex flex-wrap justify-content-center gap-5" id="contenedor_productos"></section>
+      <!-- <section class="container d-flex flex-wrap justify-content-center gap-5" id="contenedor_productos"">
+        <div class="card" style="width: 18rem;">
+          <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Lápiz HB</h5>
+            <p class="card-text">Lápiz HB Faber-Castell</p>
+            <a href="#" class="btn btn-primary">Comprar</a>
+          </div>
+        </div>
+        </div>
+      </section>
+    </main> -->
+
+
+    <!-- Modal -->
+    <div
+      class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="exampleModalLabel">Carrito de Compras</h2>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="contenedor_carrito">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Seguir Comprando</button>
+            <button type="button" class="btn btn-danger">Finalizar Compra</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
