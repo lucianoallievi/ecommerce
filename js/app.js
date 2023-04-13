@@ -29,7 +29,7 @@ function leerStorage() {
 }
 function cargarArticulos() {
   setTimeout;
-  fetch("/js/productos.json")
+  fetch("../js/productos.json")
     .then((res) => res.json())
     .then((res) => {
       res.forEach((art) => {
