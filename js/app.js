@@ -28,8 +28,8 @@ function leerStorage() {
   }
 }
 function cargarArticulos() {
-  setTimeout;
-  fetch("../ecommerce/js/productos.json")
+  // fetch("../ecommerce/js/productos.json")
+  fetch("https://lucianoallievi.github.io/ecommerce/js/productos.json")
     .then((res) => res.json())
     .then((res) => {
       res.forEach((art) => {
