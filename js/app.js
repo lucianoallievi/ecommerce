@@ -8,18 +8,24 @@ class Producto {
   }
 }
 
+const contenedor_productos = document.getElementById("contenedor_productos");
+const contenedor_carrito = document.getElementById("contenedor_carrito");
+
 const listaProductos = [];
 const listaCarrito = [];
 
-let listaProductosCarrito = [];
+let listaCarritoStorage;
 let obtenerListaJSON = localStorage.getItem("listaProductosCarrito");
 
-if (obtenerListaJSON) {
-  listaProductosCarrito = JSON.parse(obtenerListaJSON);
-} else {
-  listaProductosCarrito = [];
+function leerStorage() {
+  if (obtenerListaJSON) {
+    listaCarritoStorage = JSON.parse(obtenerListaJSON);
+    listaCarritoStorage.forEach((art) => {
+      listaCarrito.push(art);
+      contenedor_carrito.innerHTML += crearTarjetaHorizontal(art);
+    });
+  }
 }
-
 function cargarArticulos() {
   setTimeout;
   fetch("/js/productos.json")
@@ -63,7 +69,6 @@ function crearTarjetaHorizontal(producto) {
 
 function crearTarjetas() {
   contenedor_productos.innerHTML = "";
-
   listaProductos.forEach((producto) => {
     contenedor_productos.innerHTML += crearTarjeta(producto);
   });
@@ -87,11 +92,7 @@ function crearTarjetas() {
   });
 }
 
-const contenedor_productos = document.getElementById("contenedor_productos");
-const contenedor_carrito = document.getElementById("contenedor_carrito");
-
+leerStorage();
 cargarArticulos();
-
 contenedor_productos.innerHTML = `<p>Cargando productos...</p>`;
-
 setTimeout(crearTarjetas, 1500);
