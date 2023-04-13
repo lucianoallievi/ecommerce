@@ -10,6 +10,7 @@ class Producto {
 
 const contenedor_productos = document.getElementById("contenedor_productos");
 const contenedor_carrito = document.getElementById("contenedor_carrito");
+const finalizar_compra = document.getElementById("finalizar_compra");
 
 const listaProductos = [];
 const listaCarrito = [];
@@ -92,7 +93,23 @@ function crearTarjetas() {
   });
 }
 
+function finalizarCompra() {
+  finalizar_compra.addEventListener("click", () => {
+    listaCarrito.splice(0, listaCarrito.length);
+    contenedor_carrito.innerHTML = ``;
+    localStorage.clear;
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Su compra fue realizada con éxito",
+      showConfirmButton: false,
+      timer: 2500,
+    });
+  });
+}
+
 leerStorage();
 cargarArticulos();
+finalizarCompra();
 contenedor_productos.innerHTML = `<p>Cargando productos...</p>`;
 setTimeout(crearTarjetas, 1500);
